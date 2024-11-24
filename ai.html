@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAKAI - Groq AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github-dark.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-6xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text font-space-grotesk">ZAKAI</h1>
+            <p class="text-slate-400">Powered by Groq AI</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="space-y-8 bg-slate-800/50 p-8 rounded-2xl backdrop-blur-sm border border-slate-700">
+            <!-- Model Selection -->
+            <div class="space-y-3">
+                <label for="modelSelect" class="block text-sm font-medium text-slate-300">Select Groq AI Model</label>
+                <select 
+                    id="modelSelect" 
+                    class="w-full p-3 bg-slate-700 border border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none text-white transition-all duration-200"
+                >
+                    <optgroup label="AI Models">
+                        <option value="mixtral-8x7b-32768">Mixtral 8x7B (32K Context)</option>
+                        <option value="llama-3.1-8b-instant">LLaMA 3.1 8B (4K Context)</option>
+                        <option value="gemma2-9b-it">Gemma2 9B IT</option>
+                        <option value="llama3-groq-70b-8192-tool-use-preview">LLaMA 3 Groq 70B (8K Context)</option>
+                    </optgroup>
+                </select>
+                <p class="text-xs text-slate-400 mt-2">All models are optimized for fast inference through Groq's LPU™ technology</p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <label for="queryInput" class="block text-sm font-medium text-slate-300">Your Question</label>
+                    <span class="text-xs text-slate-400 bg-slate-700/50 px-3 py-1 rounded-full">Press Ctrl + Enter to Submit</span>
+                </div>
+                <textarea 
+                    id="queryInput" 
+                    class="w-full h-48 p-4 bg-slate-700 border border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none text-white font-mono text-sm resize-y placeholder-slate-500 transition-all duration-200"
+                    placeholder="Enter your question here..."
+                ></textarea>
+
+                <div class="flex space-x-4">
+                    <button 
+                        id="submitQuery"
+                        class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    >
+                        <span id="buttonText" class="font-bold text-lg">Generate Respond</span>
+                        <span id="loadingSpinner" class="hidden items-center justify-center">
+                            <svg class="animate-spin h-5 w-5 text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Processing Response...
+                        </span>
+                    </button>
+                    <button 
+                        id="clearButton"
+                        class="px-6 py-4 bg-slate-700 hover:bg-slate-600 rounded-xl border border-slate-600 transition-colors duration-200"
+                        title="Clear conversation"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            
+<div class="flex items-center gap-2 mb-4">
+                    <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+                    <h2 class="text-lg font-semibold">Response</h2>
+                </div>
+            <!-- Response Section -->
+            <div id="response" class="mt-8 hidden">
+                <div class="bg-slate-900 rounded-xl p-6 border border-slate-700 shadow-lg">
+                    <div class="prose prose-invert max-w-none">
+                        <!-- Response content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <script src="js/ai.js"></script>
+</body>
+</html>
