@@ -23,18 +23,6 @@
         },
     }
 
-document.addEventListener('click', function() {
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen();
-  } else if (document.documentElement.mozRequestFullScreen) { // Untuk Firefox
-    document.documentElement.mozRequestFullScreen();
-  } else if (document.documentElement.webkitRequestFullscreen) { // Untuk Safari
-    document.documentElement.webkitRequestFullscreen();
-  } else if (document.documentElement.msRequestFullscreen) { // Untuk Internet Explorer/Edge
-    document.documentElement.msRequestFullscreen();
-  }
-});
-
     const GROQ_API_BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
     const API_KEY = "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";
 
